@@ -17,7 +17,8 @@ Even though you can automate that with Puppet, for this deployment you’ll need
 	# export JAVA_HOME=/opt/java
 	# export PATH=$PATH:$JAVA_HOME/bin
 
-3. Host downloaded Stratos packs and their MD5 hashes from the Oxygentank and make those available to the deployment through HTTP.
+3. Host downloaded Stratos packs and their MD5 hashes from the Oxygentank ( http://wso2.org/more-downloads/stratos ) 
+   and make those available to target hosts through HTTP.
 
 Setting up the DB server
 =========================
