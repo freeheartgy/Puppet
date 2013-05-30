@@ -43,14 +43,19 @@ Also the services are not in the maintenance mode in the provided nodes.pp. That
 WSO2 Stratos for the first time. Once deployed, you can set the maintenance_mode to true so that in the next maintenance cycle, 
 it’ll just look for new patches and configuration updates.
 
-
-	class { "stratos_as":
-            	offset => 1,
-               	tribes_port => 4100,
-            	config_db => "appserver_config",
-               	maintenance_mode => "true",
-               	stage => "deploy",
- 	}
+	class {"stratos::appserver":
+                version            => "5.0.2",
+                offset             => 1,
+                tribes_port        => 4100,
+                config_db          => "appserver_config",
+                maintenance_mode   => "false",
+                depsync            => "true",
+                sub_cluster_domain => "worker",
+		owner		   => "kurumba",
+		group		   => "kurumba",
+                target             => "/mnt/${server_ip}",
+                stage              => "deploy",
+        }	
 
 Also you need to set the server_ip with the IP address of the target host. 
 This requires to add some local hosts entries and find the target path of the deployment.
@@ -60,11 +65,21 @@ This requires to add some local hosts entries and find the target path of the de
 
 Change the load balancer parameters to front necessary services according to your deployment.
 
-	class {"stratos_lb":
-               	fronted_services  => ["appserver","identity","process","monitor","rule"],
-               	stage => "deploy",
-               	maintenance_mode => "true",
-       	}
+	class {"stratos::elb":
+                services           =>  ["identity,*,mgt",
+					"esb,*,mgt",
+					"dss,*,mgt",
+                                        "governance,*,mgt"],
+                version            => "2.0.2",
+                maintenance_mode   => "true",
+                auto_scaler        => "false",
+                auto_failover      => "false",
+		owner		   => "root",
+		group		   => "root",
+		target             => "/mnt/${server_ip}",
+                stage              => "deploy",
+        }
+
 
 Change templates/hosts.erb accordingly so that service nodes don’t have to depend on any name-servers.
 
