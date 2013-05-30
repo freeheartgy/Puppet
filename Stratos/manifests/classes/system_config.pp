@@ -2,10 +2,6 @@ class system_config {
 
 	include hosts
 	include apt
-	include nrpe
-	include ganglia
-        include java
-	include mcollective
 
 	class { "ssh":
                 port => 1984,
@@ -17,7 +13,7 @@ class system_config {
         }
 	
 	user { "kurumba": 
-  		password   => "1Mmhh30pWiMz2N720hC4",
+  		password   => "ZZZZZZZZZZZZZZZZZZZZ",
   		ensure     => present,                            
  	 	managehome => true,
 	}
