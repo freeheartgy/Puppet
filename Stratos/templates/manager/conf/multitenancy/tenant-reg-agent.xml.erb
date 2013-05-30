@@ -1,0 +1,55 @@
+<tenantRegListenerServers>
+    <server>
+        <!-- governance -->
+        <serverUrl>https://<%= governance_subdomain %>.<%= stratos_domain %>/services/</serverUrl>
+		<userName>admin</userName>
+		<password>admin</password>        
+    </server>
+    <server>
+        <!-- identity -->
+        <serverUrl>https://<%= is_subdomain %>.<%= stratos_domain %>/services/</serverUrl>
+		<userName>admin</userName>
+		<password>admin</password>        
+    </server>
+    <server>
+        <!-- app server -->
+        <serverUrl>https://<%= management_subdomain %>.<%= as_subdomain %>.<%= stratos_domain %>/services/</serverUrl>
+		<userName>admin</userName>
+		<password>admin</password>        
+    </server>
+	<!-- bam -->
+	<server>
+        <serverUrl>https://<%= bam_subdomain %>.<%= stratos_domain %>/services/</serverUrl>
+		<userName>admin</userName>
+		<password>admin</password>        
+    </server>
+	<!-- brs -->
+	<server>
+        <serverUrl>https://<%= management_subdomain %>.<%= brs_subdomain %>.<%= stratos_domain %>/services/</serverUrl>
+		<userName>admin</userName>
+		<password>admin</password>        
+	</server>
+	<!-- esb -->
+	<server>
+        <serverUrl>https://<%= management_subdomain %>.<%= esb_subdomain %>.<%= stratos_domain %>/services/</serverUrl>
+		<userName>admin</userName>
+		<password>admin</password>        
+    </server>
+	<!-- dss -->
+	<server>
+        <serverUrl>https://<%= management_subdomain %>.<%= dss_subdomain %>.<%= stratos_domain %>/services/</serverUrl>
+		<userName>admin</userName>
+		<password>admin</password>        
+    </server>
+	<!-- bps -->
+	<server>
+        <serverUrl>https://<%= management_subdomain %>.<%= bps_subdomain %>.<%= stratos_domain %>/services/</serverUrl>
+		<userName>admin</userName>
+		<password>admin</password>        
+    </server>
+	<server>
+        <serverUrl>https://<%= mb_subdomain %>.<%= stratos_domain %>/services/</serverUrl>
+		<userName>admin</userName>
+		<password>admin</password>        
+    </server>
+</tenantRegListenerServers>

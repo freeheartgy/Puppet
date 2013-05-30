@@ -1,0 +1,86 @@
+<!--
+ ~ Copyright (c) 2005-2011, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+ ~
+ ~ WSO2 Inc. licenses this file to you under the Apache License,
+ ~ Version 2.0 (the "License"); you may not use this file except
+ ~ in compliance with the License.
+ ~ You may obtain a copy of the License at
+ ~
+ ~    http://www.apache.org/licenses/LICENSE-2.0
+ ~
+ ~ Unless required by applicable law or agreed to in writing,
+ ~ software distributed under the License is distributed on an
+ ~ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ ~ KIND, either express or implied.  See the License for the
+ ~ specific language governing permissions and limitations
+ ~ under the License.
+ -->
+
+<!--
+    This is the configuration file for logging specific properties.
+-->
+
+<loggingConfig xmlns="http://wso2.org/projects/carbon/carbon.xml">
+	<isDataFromCassandra>true</isDataFromCassandra>
+	<deleteColFamily>false</deleteColFamily>	
+	<!--Set the BAM Event publisher host url which specifies the log location where the logs are hosted-->
+	<cassandraHost><%= cassandra_url %>:<%= cassandra_port %></cassandraHost>
+	<keyspace>EVENT_KS</keyspace>
+	<columnFamily>log</columnFamily>
+	<userName><%= cassandra_username %></userName>
+	<password><%= cassandra_password %></password>
+	<cluster>admin</cluster>
+	<publisherURL>tcp://<%= receiver_url %>:<%= receiver_port %></publisherURL>
+	<publisherUser><%= receiver_username %></publisherUser>
+	<publisherPassword><%= receiver_password %></publisherPassword>
+	<archivedHost>http://<%= archive_url %>:81/logs/stratos/</archivedHost>
+	<!--Cron expression for daily 1:00 am Summary Generation-->
+	<!--cronExpression>0 0 1 ? * * *</cronExpression-->  
+	<cronExpression>1 * * * * ? *</cronExpression>  
+	<archivedUser><%= archive_username %></archivedUser>
+	<archivedPassword><%= archive_password %></archivedPassword>
+	<archivedPort>80</archivedPort>
+	<archivedRealm>Stratos</archivedRealm>
+	<!--<logDirectory>/home/usr/apache/logs/</logDirectory>
+	<tmpLogDirectory>/home/usr/temp/logs</tmpLogDirectory>
+	<bamUserName>admin</bamUserName>
+	<bamPassword>admin</bamPassword>-->
+	<hiveQuery>
+	set logs_column_family = %s;
+	set file_path= %s;
+	drop table LogStats;
+	set mapred.output.compress=true;
+	set hive.exec.compress.output=true;
+	set mapred.output.compression.codec=org.apache.hadoop.io.compress.GzipCodec;
+	set io.compression.codecs=org.apache.hadoop.io.compress.GzipCodec;
+
+	CREATE EXTERNAL TABLE IF NOT EXISTS LogStats (key STRING,
+		payload_tenantID STRING,payload_serverName STRING,
+		payload_appName STRING,payload_message STRING,
+		payload_stacktrace STRING,
+		payload_logger STRING,
+		payload_priority STRING,payload_logTime BIGINT) 
+		STORED BY 'org.apache.hadoop.hive.cassandra.CassandraStorageHandler' 
+		WITH SERDEPROPERTIES ( "cassandra.host" = %s,
+		"cassandra.port" = %s,"cassandra.ks.name" = %s,
+		"cassandra.ks.username" = %s,"cassandra.ks.password" = %s,
+		"cassandra.cf.name" = ${hiveconf:logs_column_family},
+		"cassandra.columns.mapping" = 
+		":key,payload_tenantID,
+		payload_serverName,payload_appName,payload_message,
+		payload_stacktrace,payload_logger,payload_priority,
+		payload_logTime" );
+	INSERT OVERWRITE LOCAL DIRECTORY 'file:///${hiveconf:file_path}' 
+		select 
+		concat('TID[',payload_tenantID, ']\t',
+		'Server[',payload_serverName,']\t',
+		'Application[',payload_appName,']\t',
+		'Message[',payload_message,']\t',
+		'Stacktrace ',payload_stacktrace,'\t',
+		'Logger{',payload_logger,'}\t',
+		'Priority[',payload_priority,']\t'),
+		concat('LogTime[',
+		(from_unixtime(cast(payload_logTime/1000 as BIGINT),'yyyy-MM-dd HH:mm:ss.SSS' )),']\n') as LogTime from LogStats
+		ORDER BY LogTime;
+	</hiveQuery>
+</loggingConfig>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<cluster>
+    <configuration>
+        <node_id><%= css_id %></node_id>
+        <monitoring_enable>true</monitoring_enable>
+        <bam_secure_url>ssl://<%= receiver_url %>:<%= receiver_secure_port %></bam_secure_url>
+        <bam_receiver_url>tcp://<%= receiver_url %>:<%= receiver_port %></bam_receiver_url>
+        <cron_expression>0/10 * * ? * *</cron_expression>
+        <bam_authentiacation>
+            <username><%= receiver_username %></username>
+            <password><%= receiver_password %></password>
+        </bam_authentiacation>
+    </configuration>
+</cluster>

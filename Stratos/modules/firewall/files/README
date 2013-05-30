@@ -1,0 +1,7 @@
+This directory contains scripts to add and flush Iptables rules.
+
+Whenever you need to run a new rule or change an existing one, it's recommended that
+you run the "flush.sh" first and execute "firewall.sh". If you are running these
+scripts on a new server, set IFACE and INERADDR variables accordingly and execute 
+the script. 
+

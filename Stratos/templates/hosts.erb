@@ -1,0 +1,81 @@
+127.0.0.1	localhost
+
+10.17.217.247	stratos01.wso2.com
+10.17.217.240	stratos02.wso2.com
+10.17.217.105	stratos03.wso2.com
+10.17.213.249	stratos04.wso2.com
+10.17.211.222	stratos05.wso2.com
+10.17.208.235   stratos06.wso2.com
+10.17.216.202	stratos07.wso2.com
+10.17.215.221	stratos08.wso2.com
+10.17.210.42	stratos09.wso2.com
+
+10.123.22.29	stratosx.wso2.com
+
+204.13.82.227 	puppetmaster.wso2.com
+
+<%= server_ip %>	bind.<%= stratos_domain %>
+<%= server_ip %>	local.<%= stratos_domain %>
+
+
+10.17.217.105 	<%= stratos_domain %>
+
+10.17.213.249 	<%= management_subdomain %>.<%= as_subdomain %>.<%= stratos_domain %>
+10.17.213.249	<%= as_subdomain %>.<%= stratos_domain %>
+
+10.17.217.240	<%= management_subdomain %>.<%= esb_subdomain %>.<%= stratos_domain %>
+10.17.217.240	<%= esb_subdomain %>.<%= stratos_domain %>
+
+10.17.211.222	<%= management_subdomain %>.<%= dss_subdomain %>.<%= stratos_domain %>
+10.17.211.222	<%= dss_subdomain %>.<%= stratos_domain %>
+10.17.215.221	<%= cep_subdomain %>.<%= stratos_domain %>
+
+10.17.217.240	<%= management_subdomain %>.<%= brs_subdomain %>.<%= stratos_domain %>
+10.17.217.240	<%= brs_subdomain %>.<%= stratos_domain %>
+
+10.17.208.235	<%= management_subdomain %>.<%= bps_subdomain %>.<%= stratos_domain %>
+10.17.208.235	<%= bps_subdomain %>.<%= stratos_domain %>
+
+10.17.217.247 	<%= governance_subdomain %>.<%= stratos_domain %>
+10.17.210.42	<%= mb_subdomain %>.<%= stratos_domain %>
+10.17.217.105	<%= ss_subdomain %>.<%= stratos_domain %>
+10.17.217.247	<%= is_subdomain %>.<%= stratos_domain %>
+10.17.213.249	<%= ts_subdomain %>.<%= stratos_domain %>
+10.17.208.235	<%= bam_subdomain %>.<%= stratos_domain %>
+10.17.216.202	<%= cg_subdomain %>.<%= stratos_domain %>
+
+# SVN repo for depsync
+10.123.22.29	svn.<%= stratos_domain %>
+
+# RDS instances for MySQL
+10.38.126.176   <%= mysql_server_1 %>
+10.68.175.133   <%= mysql_server_2 %>
+
+# Cassandra cluster
+10.17.216.202	node0.cassandra.<%= stratos_domain %>
+10.17.215.221 	node1.cassandra.<%= stratos_domain %>
+10.17.210.42 	node2.cassandra.<%= stratos_domain %>
+10.17.216.202	css0.<%= stratos_domain %>
+10.17.215.221 	css1.<%= stratos_domain %>
+10.17.210.42 	css2.<%= stratos_domain %>
+
+
+# Hadoop cluster
+10.17.216.202	hadoop0.<%= stratos_domain %>
+10.17.215.221 	hadoop1.<%= stratos_domain %>
+10.17.210.42 	hadoop2.<%= stratos_domain %>
+
+# BAM nodes
+10.96.158.31	archive.<%= stratos_domain %>
+10.17.217.105	receiver.<%= stratos_domain %>
+
+# Mail server
+209.126.229.56 	panthro.wso2.org
+
+# Packs download location
+204.13.82.227 	downloads.stratos.wso2.com
+
+# RSS instance
+10.114.227.116 <%= rss_instance0 %>.<%= stratos_domain %>
+10.114.227.116 <%= rss_instance1 %>.<%= stratos_domain %>
+

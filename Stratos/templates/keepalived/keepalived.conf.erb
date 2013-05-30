@@ -1,0 +1,38 @@
+global_defs {
+
+	notification_email {
+       		chamith@wso2.com
+		sanjaya@wso2.com
+   	}
+   
+	notification_email_from chamith@wso2.com
+   	smtp_server 204.13.82.221
+	smtp_connect_timeout 30
+	router_id VRRP-director1
+	
+}
+
+vrrp_script check_elb {
+        script "/opt/bin/check_load_balancer.sh"
+        interval <%= check_interval %>
+        weight 2
+}
+
+vrrp_instance VRRP-director1 {
+        
+	virtual_router_id 51
+	advert_int 1
+	smtp_alert
+        interface <%= interface %>
+        state <%= state %>
+        priority <%= priority %>
+
+        virtual_ipaddress {
+            <%= virtual_ip %> 
+        }
+
+        track_script {
+            check_elb
+        }
+}
+
