@@ -87,8 +87,8 @@ Change the $packs_repo to the repository you setup early with downloaded packs.
 
 Download the MySQL JDBC driver and copy the jar to following locations.
 	
-	modules/stratos_as/files/configs/lib/api/mysql-connector-java-x.x.x-bin.jar
-	modules/stratos_commons/files/configs/repository/components/lib/mysql-connector-java-x.x.x-bin.jar
+	modules/as/files/configs/lib/api/mysql-connector-java-x.x.x-bin.jar
+	modules/commons/files/configs/repository/components/lib/mysql-connector-java-x.x.x-bin.jar
 
 Now you can login to each target node and run puppetd -vt.
 
