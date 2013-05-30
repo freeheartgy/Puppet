@@ -111,8 +111,6 @@ node confignode inherits basenode  {
 	$time_zone		= "GMT-8:00"
 }
 
-### PUPPET-DEV STRATOS NODES IN LK VMs ####
-
 node 'platform01.domain.com' inherits confignode {
 	$server_ip 	= $ipaddress
 	
