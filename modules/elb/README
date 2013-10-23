@@ -3,7 +3,7 @@ Requirements:
 
 How to use:
 1. Import wso2.pp to sites.pp file in Puppet master.
-2. Change the variables in wso2.pp accordingly.
+2. Change the variables in params.pp accordingly.
 3. Create a directory inside files/configs/repository/components/lib and copy
    the mysql connector jar file.
 4. Download the WSO2 ELB pack to a file server and add the URL to

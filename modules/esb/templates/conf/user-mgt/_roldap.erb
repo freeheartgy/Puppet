@@ -6,26 +6,27 @@
             <Property name="ConnectionURL"><%= @ldap_connection_uri %></Property>
             <Property name="ConnectionName"><%= @bind_dn %></Property>
             <Property name="ConnectionPassword"><%= @bind_dn_password %></Property>
-            <Property name="passwordHashMethod"><%= @password_hash_method %></Property>
-            <Property name="UserSearchBase"><%= @user_serch_base %></Property>
-            <Property name="UserNameListFilter"><%= @username_list_filter %></Property>
-            <Property name="UserNameSearchFilter"><%= @username_search_filter %></Property>
-            <Property name="UserNameAttribute"><%= @username_attribute %></Property>
-            <Property name="ReadGroups"><%= @read_groups %></Property>
+            <Property name="passwordHashMethod">SHA</Property>
+            <Property name="UserSearchBase"><%= @user_search_base %></Property>
+            <Property name="UserNameListFilter">(objectClass=person)</Property>
+            <Property name="UserNameSearchFilter">(&amp;(objectClass=person)(uid=?))</Property>
+            <Property name="UserNameAttribute">uid</Property>
+            <Property name="ReadGroups">true</Property>
             <Property name="GroupSearchBase"><%= @group_search_base %></Property>
-            <Property name="GroupNameListFilter"><%= @groupname_list_filter %></Property>
-            <Property name="GroupNameSearchFilter"><%= @groupname_search_filter %></Property>
-            <Property name="GroupNameAttribute"><%= @groupname_attribute %></Property>
-            <Property name="SharedGroupNameAttribute"><%= @sharedgroupname_attribute %></Property>
+            <Property name="GroupNameListFilter">(objectClass=groupOfNames)</Property>
+            <Property name="GroupNameSearchFilter">(&amp;(objectClass=groupOfNames)(cn=?))</Property>
+            <Property name="GroupNameAttribute">cn</Property>
+            <Property name="SharedGroupNameAttribute">cn</Property>
             <Property name="SharedGroupSearchBase"><%= @sharedgroup_search_base %></Property>
-            <Property name="SharedGroupNameListFilter"><%= @sharedgroupname_list_filter %></Property>
-            <Property name="SharedTenantNameListFilter"><%= @sharedtenant_list_filter %></Property>
-            <Property name="SharedTenantNameAttribute"><%= @sharedtenant_attribute %></Property>
-            <Property name="SharedTenantObjectClass"><%= @organizationalUnit %></Property>
-            <Property name="MembershipAttribute"><%= @membership_attribute %></Property>
-            <Property name="UserRolesCacheEnabled"><%= @user_roles_cache_enabled %></Property>
+            <Property name="SharedGroupNameListFilter">(objectClass=groupOfNames)</Property>
+            <Property name="SharedTenantNameListFilter">(objectClass=organizationalUnit)</Property>
+            <Property name="SharedTenantNameAttribute">ou</Property>
+            <Property name="SharedTenantObjectClass">organizationalUnit</Property>
+            <Property name="MembershipAttribute">member</Property>
+            <Property name="UserRolesCacheEnabled">true</Property>
             <Property name="ReplaceEscapeCharactersAtUserLogin">true</Property>
             <Property name="MaxRoleNameListLength">100</Property>
             <Property name="MaxUserNameListLength">100</Property>
-            <Property name="SCIMEnabled"><%= @scim_enabled %></Property>
+            <Property name="SCIMEnabled">false</Property>
         </UserStoreManager>
+
