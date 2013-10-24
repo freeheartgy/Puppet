@@ -37,7 +37,6 @@
 
 class elb (
   $version            = undef,
-  $env                = undef,
   $services           = undef,
   $members            = undef,
   $maintenance_mode   = true,

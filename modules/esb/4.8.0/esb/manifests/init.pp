@@ -45,7 +45,6 @@
 
 class esb (
   $version            = undef,
-  $env                = undef,
   $sub_cluster_domain = undef,
   $members            = undef,
   $port_mapping       = undef,

@@ -45,11 +45,7 @@
        This is will become part of the End Point Reference of the
        services deployed on this server instance.
     -->
-    <%- if @env == 'prod' or !@env -%> 
     <HostName><%= @esb_subdomain%>.<%= @domain %></HostName>
-    <%- else -%> 
-    <HostName><%= @esb_subdomain%>.<%= @env %>.<%= @domain %></HostName>
-    <%- end -%> 
     <!--
     Host name to be used for the Carbon management console
     -->

@@ -42,7 +42,6 @@
 
 class appserver (
   $version            = undef,
-  $env                = undef,
   $sub_cluster_domain = undef,
   $members            = undef,
   $offset             = 0,

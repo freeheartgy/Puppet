@@ -618,11 +618,7 @@
          The clustering domain/group. Nodes in the same group will belong to the same multicast
          domain. There will not be interference between nodes in different groups.
         -->
-				<%- if @env == 'prod' or !@env -%>
 				<parameter name="domain">wso2.<%= @as_subdomain %>.domain</parameter>
-				<%- else -%>
-				<parameter name="domain">wso2.<%= @as_subdomain %>.<%= @env %>.domain</parameter>
-				<%- end -%>
 
         <!-- The multicast address to be used -->
         <!--<parameter name="mcastAddress">228.0.0.4</parameter>-->
