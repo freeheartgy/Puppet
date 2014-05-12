@@ -1,0 +1,54 @@
+    <dbConfig name="<%= @registry_database %>">
+        <dataSource>jdbc/<%= @registry_database %></dataSource>
+    </dbConfig>
+
+    <remoteInstance url="https://<%= @governance_subdomain %><%= @env_type %>.<%= @domain %>">
+        <id><%= @registry_database %></id>
+        <dbConfig>governance</dbConfig>
+        <readOnly>false</readOnly>
+        <registryRoot>/</registryRoot>
+        <enableCache>true</enableCache>
+        <cacheId><%= @registry_user %>@jdbc:mysql://<%= @mysql_server %>:<%= @mysql_port %>/<%= @registry_database %></cacheId>
+    </remoteInstance>
+
+   
+
+    <dbConfig name="config">
+        <dataSource>jdbc/<%= @config_db %></dataSource>
+    </dbConfig>
+
+    <remoteInstance url="https://<%= @am_subdomain %>.<%= @domain %>">
+        <id>config</id>
+        <dbConfig>config</dbConfig>
+        <readOnly>false</readOnly>
+        <registryRoot>/</registryRoot>
+        <enableCache>true</enableCache>
+        <cacheId><%= @registry_user %>@jdbc:mysql://<%= @mysql_server %>:<%= @mysql_port %>/<%= @config_db %></cacheId>
+    </remoteInstance>
+    
+    <mount path="/_system/governance/trunk" overwrite="true">
+        <instanceId><%= @registry_database %></instanceId>
+        <targetPath>/_system/governance/trunk</targetPath>
+    </mount>
+    <mount path="/_system/governance/repository" overwrite="true">
+        <instanceId><%= @registry_database %>g</instanceId>
+        <targetPath>/_system/governance/repository</targetPath>
+    </mount>
+    <mount path="/_system/governance/permission" overwrite="true">
+        <instanceId><%= @registry_database %></instanceId>
+        <targetPath>/_system/governance/permission</targetPath>
+    </mount>
+    <mount path="/_system/governance/apimgt" overwrite="true">
+        <instanceId><%= @registry_database %></instanceId>
+        <targetPath>/_system/governance/apimgt_ext</targetPath>
+    </mount>
+
+    <mount path="/_system/governance/event" overwrite="true">
+        <instanceId><%= @registry_database %></instanceId>
+        <targetPath>/_system/governance/event</targetPath>
+    </mount>
+
+    <mount path="/_system/config" overwrite="virtual">
+        <instanceId>config</instanceId>
+        <targetPath>/_system/<%= @config_db %></targetPath>
+    </mount>
