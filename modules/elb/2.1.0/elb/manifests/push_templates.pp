@@ -18,8 +18,8 @@
 define elb::push_templates ( $directory, $target ) {
   file { "${target}/repository/${name}":
     ensure  => present,
-    owner   => $owner,
-    group   => $group,
+    owner   => $elb::owner,
+    group   => $elb::group,
     mode    => '0755',
     content => template("${directory}/${name}.erb"),
   }
