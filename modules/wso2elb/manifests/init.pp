@@ -38,7 +38,7 @@
 class wso2elb (
   $version            = '2.1.0',
   $services           = [['as','*','worker','4001','elb01w02.cloud-lbdev.datayes.com:4001','*'],['is','*','worker','4002','elb01w02.cloud-lbdev.datayes.com:4002','*']],
-  $members            = {'elb01w02.cloud-lbdev.datayes.com' =>4000 },
+#  $members            = {'elb01w02.cloud-lbdev.datayes.com' =>4000 },
   $maintenance_mode   = true,
   $cloud              = false,
   $owner              = 'root',

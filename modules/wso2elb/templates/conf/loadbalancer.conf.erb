@@ -65,14 +65,14 @@ services {
       <% if service[2] == '*' %>
       datayes.paas.<%= service[0] %>.domain {
         mgt {
-          <% if service[5] == 'internal' %>
+          <% if (service[5] == 'internal') or (service[5] == 'internal_only_mgt') %>
             hosts cloud-<%= service[0] %>-<%= @management_subdomain %>-int<%= @env_type %>.<%= @domain %>;
           <% else %>
             hosts cloud-<%= service[0] %>-<%= @management_subdomain %><%= @env_type %>.<%= @domain %>;
           <% end %>
         }   
         worker {         
-          <% if service[5] == 'internal' %>
+          <% if (service[5] == 'internal') or (service[5] == 'internal_only_worker') %>
             hosts cloud-<%= service[0] %>-int<%= @env_type %>.<%= @domain %>;
           <% else %>
             hosts cloud-<%= service[0] %><%= @env_type %>.<%= @domain %>;
@@ -90,12 +90,18 @@ services {
           <% else %>
              hosts cloud-<%= service[0] %>-<%= @management_subdomain %><%= @env_type %>.<%= @domain %>; 
           <% end %> 
-        }   
+        } 
+        worker {
+
+        }  
         group_mgt_port     <%= service[3] %>; 
         members            <%= service[4] %>;
         tenant_range       <%= service[1] %>; 
       }<% elsif service[2] == 'worker' %>
       datayes.paas.<%= service[0] %>.domain {
+        mgt {
+
+        }
         worker {
           
           <% if service[5] == 'internal' %>

@@ -37,5 +37,10 @@ class wso2elb::params {
   
   $env_type = "-dev"
 
+  $local_member_host = 'elb01w01.cloud-lbdev.datayes.com'
+  
+  $http_port = '80'
+  $https_port = '443'  
+
   
 }
